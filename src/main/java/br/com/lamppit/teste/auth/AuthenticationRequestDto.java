@@ -1,17 +1,17 @@
-package br.com.lamppit.teste.dto;
+package br.com.lamppit.teste.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import br.com.lamppit.teste.model.User;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserLoginDto {
+public class AuthenticationRequestDto {
 
-    private User user;
-    private String token;
+    private String email;
+
+    private String password;
 }

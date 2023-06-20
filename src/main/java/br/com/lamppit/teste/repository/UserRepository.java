@@ -8,6 +8,4 @@ import br.com.lamppit.teste.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
-    Optional<User> findByUsername(String email);
-
 }
