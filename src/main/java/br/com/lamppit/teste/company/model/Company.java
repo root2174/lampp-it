@@ -21,7 +21,7 @@ public class Company {
     @Column(name = "open_hour", nullable = false)
     private int openHour;
     @Column(name = "closed_hour", nullable = false)
-    private int closeHour;
+    private int closedHour;
 
     private String email;
 
