@@ -1,4 +1,4 @@
-package br.com.lamppit.teste.auth;
+package br.com.lamppit.teste.auth.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

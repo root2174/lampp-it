@@ -1,11 +1,11 @@
-package br.com.lamppit.teste.model;
+package br.com.lamppit.teste.company.model;
 
 import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "company", schema = "public", uniqueConstraints = @UniqueConstraint(columnNames = { "email" }))
+@Table(name = "company", uniqueConstraints = @UniqueConstraint(columnNames = { "email" }))
 @Getter
 @Setter
 @Builder

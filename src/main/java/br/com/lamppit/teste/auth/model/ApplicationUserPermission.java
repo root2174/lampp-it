@@ -1,4 +1,4 @@
-package br.com.lamppit.teste.auth;
+package br.com.lamppit.teste.auth.model;
 
 public enum ApplicationUserPermission {
     PRODUCT_WRITE("product_write"),

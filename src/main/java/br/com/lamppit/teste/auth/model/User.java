@@ -1,10 +1,9 @@
-package br.com.lamppit.teste.model;
+package br.com.lamppit.teste.auth.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-import br.com.lamppit.teste.auth.Role;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

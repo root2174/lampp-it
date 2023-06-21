@@ -1,4 +1,4 @@
-package br.com.lamppit.teste.auth;
+package br.com.lamppit.teste.auth.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
-    private String token;
-    private Long id;
+public class AuthenticationRequestDto {
+
+    private String email;
+
+    private String password;
 }

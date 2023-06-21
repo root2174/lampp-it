@@ -1,5 +1,9 @@
-package br.com.lamppit.teste.auth;
+package br.com.lamppit.teste.auth.service;
 
+import br.com.lamppit.teste.auth.dto.AuthenticationResponse;
+import br.com.lamppit.teste.auth.model.Role;
+import br.com.lamppit.teste.auth.model.User;
+import br.com.lamppit.teste.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -7,8 +11,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import br.com.lamppit.teste.model.User;
-import br.com.lamppit.teste.repository.UserRepository;
 import br.com.lamppit.teste.util.JwtUtilities;
 
 @Service
@@ -42,7 +44,7 @@ public class AuthenticationService {
                 .build();
     }
 
-    public AuthenticationResponse register(String email, String password) {
+    public AuthenticationResponse register(String email, String password, Role role) {
         userRepository
                 .findByEmail(email)
                 .ifPresent(user -> {
@@ -55,7 +57,7 @@ public class AuthenticationService {
                .builder()
                .password(hashedPassword)
                .email(email)
-               .role(Role.CUSTOMER)
+               .role(role)
                .build();
 
        userRepository.save(user);

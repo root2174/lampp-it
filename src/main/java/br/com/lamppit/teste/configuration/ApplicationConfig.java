@@ -1,6 +1,6 @@
 package br.com.lamppit.teste.configuration;
 
-import br.com.lamppit.teste.repository.UserRepository;
+import br.com.lamppit.teste.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

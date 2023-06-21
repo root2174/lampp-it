@@ -1,10 +1,10 @@
-package br.com.lamppit.teste.auth;
+package br.com.lamppit.teste.auth.model;
 
 import com.google.common.collect.Sets;
 
 import java.util.Set;
 
-import static br.com.lamppit.teste.auth.ApplicationUserPermission.*;
+import static br.com.lamppit.teste.auth.model.ApplicationUserPermission.*;
 
 public enum Role {
     CUSTOMER(Sets.newHashSet()),

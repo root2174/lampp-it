@@ -1,4 +1,4 @@
-package br.com.lamppit.teste.auth;
+package br.com.lamppit.teste.auth.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -17,5 +17,6 @@ public class RegisterRequestDto {
     private String password;
 
     @NotBlank
+    @ApiModelProperty(example = "admin@admin.com")
     private String email;
 }

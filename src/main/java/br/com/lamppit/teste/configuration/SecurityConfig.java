@@ -16,7 +16,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import static br.com.lamppit.teste.auth.Role.*;
+import static br.com.lamppit.teste.auth.model.Role.*;
 
 @Configuration
 @EnableWebSecurity

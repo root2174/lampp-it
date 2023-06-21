@@ -1,5 +1,10 @@
-package br.com.lamppit.teste.auth;
+package br.com.lamppit.teste.auth.controller;
 
+import br.com.lamppit.teste.auth.dto.AuthenticationResponse;
+import br.com.lamppit.teste.auth.dto.AuthenticationRequestDto;
+import br.com.lamppit.teste.auth.dto.RegisterRequestDto;
+import br.com.lamppit.teste.auth.model.Role;
+import br.com.lamppit.teste.auth.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -41,7 +46,7 @@ public class AuthenticationUserController {
             UriComponentsBuilder uriBuilder
     ) {
 
-        var authenticationResponse = service.register(data.getEmail(), data.getPassword());
+        var authenticationResponse = service.register(data.getEmail(), data.getPassword(), Role.CUSTOMER);
 
         var uri = uriBuilder.path("/user/{id}")
                 .buildAndExpand(authenticationResponse.getId()).toUri();
