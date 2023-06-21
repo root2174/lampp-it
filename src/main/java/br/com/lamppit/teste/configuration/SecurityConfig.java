@@ -50,14 +50,15 @@ public class SecurityConfig {
 		http
 				.csrf().disable()
 				.authorizeHttpRequests(request -> request
-								.requestMatchers(new AntPathRequestMatcher("/auth/login")).permitAll()
+								.requestMatchers(new AntPathRequestMatcher("/api/v1/auth/**")).permitAll()
 						.requestMatchers(new AntPathRequestMatcher("/v2/api-docs")).permitAll()
 						.requestMatchers(new AntPathRequestMatcher("/configuration/ui")).permitAll()
 						.requestMatchers(new AntPathRequestMatcher("/swagger-resources/**")).permitAll()
 						.requestMatchers(new AntPathRequestMatcher("/configuration/security")).permitAll()
 						.requestMatchers(new AntPathRequestMatcher("/swagger-ui.html")).permitAll()
 						.requestMatchers(new AntPathRequestMatcher("/webjars/**")).permitAll()
-						.requestMatchers(new AntPathRequestMatcher("/api/v1/hello")).hasRole(CUSTOMER.name())
+						.requestMatchers(new AntPathRequestMatcher("/api/v1/hello")).permitAll()
+						.requestMatchers(new AntPathRequestMatcher("/api/v1/products", "POST")).hasRole(COMPANY.name())
 						.anyRequest().permitAll()
 				)
 				.sessionManagement()

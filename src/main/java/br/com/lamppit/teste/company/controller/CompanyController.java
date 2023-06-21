@@ -41,7 +41,7 @@ public class CompanyController {
 
         var companyId = companyService.create(data);
 
-        var uri = uriBuilder.path("/company/{id}")
+        var uri = uriBuilder.path("/api/v1/company/{id}")
                 .buildAndExpand(companyId).toUri();
 
         var response = RegisterCompanyResponseData

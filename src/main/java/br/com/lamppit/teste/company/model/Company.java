@@ -1,8 +1,10 @@
 package br.com.lamppit.teste.company.model;
 
+import br.com.lamppit.teste.products.model.Product;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "company", uniqueConstraints = @UniqueConstraint(columnNames = { "email" }))
@@ -31,4 +33,7 @@ public class Company {
 
     @Column(name = "state_registration", nullable = false)
     private String stateRegistration;
+
+    @OneToMany(mappedBy = "company")
+    private List<Product> products;
 }

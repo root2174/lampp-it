@@ -27,4 +27,10 @@ public class CompanyService {
 
         return company.getId();
     }
+
+    public Company findByEmail(String email) {
+        return repository
+                .findCompanyByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Company not found."));
+    }
 }
