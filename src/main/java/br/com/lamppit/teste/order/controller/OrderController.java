@@ -3,6 +3,7 @@ package br.com.lamppit.teste.order.controller;
 import br.com.lamppit.teste.order.dto.ChangeOrderRequestData;
 import br.com.lamppit.teste.order.dto.CreateOrderRequestData;
 import br.com.lamppit.teste.order.dto.CreateOrderResponseData;
+import br.com.lamppit.teste.order.dto.OrdersResponse;
 import br.com.lamppit.teste.order.service.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -57,5 +59,22 @@ public class OrderController {
         orderService.changeStatus(request, data, orderId);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/customer/orders")
+    @ApiOperation(value = "Endpoint para o cliente acompanhar o pedido")
+    public ResponseEntity<List<OrdersResponse>> listOrdersForClient(
+            HttpServletRequest request
+    ) {
+        var orders = orderService.listOrdersForClient(request);
+        return ResponseEntity.ok().body(orders);
+    }
+    @GetMapping("/delivery/available")
+    @ApiOperation(value = "Endpoint para o cliente acompanhar o pedido")
+    public ResponseEntity<List<OrdersResponse>> listOrdersAvailableForDelivery(
+            HttpServletRequest request
+    ) {
+        var orders = orderService.listOrdersAvailableForDelivery(request);
+        return ResponseEntity.ok().body(orders);
     }
 }

@@ -3,8 +3,11 @@ package br.com.lamppit.teste.order.service;
 import br.com.lamppit.teste.company.model.Company;
 import br.com.lamppit.teste.company.service.CompanyService;
 import br.com.lamppit.teste.customer.service.CustomerService;
+import br.com.lamppit.teste.delivery_person.service.DeliveryPersonService;
 import br.com.lamppit.teste.order.dto.ChangeOrderRequestData;
 import br.com.lamppit.teste.order.dto.CreateOrderRequestData;
+import br.com.lamppit.teste.order.dto.OrdersResponse;
+import br.com.lamppit.teste.order.dto.ProductsForClientDto;
 import br.com.lamppit.teste.order.model.Order;
 import br.com.lamppit.teste.order.model.OrderStatus;
 import br.com.lamppit.teste.order.repository.OrderRepository;
@@ -14,11 +17,13 @@ import br.com.lamppit.teste.util.TimeUtils;
 import br.com.lamppit.teste.validators.CanChangeOrderStatusValidator;
 import br.com.lamppit.teste.validators.WithinBusinessHoursValidator;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Objects;
 
 @RequiredArgsConstructor
@@ -30,6 +35,8 @@ public class OrderService {
     private final JwtUtilities jwtUtilities;
     private final OrderRepository orderRepository;
     private final CompanyService companyService;
+    private final ModelMapper modelMapper;
+    private final DeliveryPersonService deliveryPersonService;
 
     public Long create(HttpServletRequest request, CreateOrderRequestData data) {
 
@@ -100,5 +107,43 @@ public class OrderService {
         }
 
         order.setOrderStatus(data.getOrderStatus());
+    }
+
+    public List<OrdersResponse> listOrdersForClient(
+            HttpServletRequest request
+    ) {
+        String email = jwtUtilities.extractUsername(
+                jwtUtilities.getToken(request)
+        );
+
+        var customer = customerService
+                .findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Customer not found!"));
+
+        return orderRepository.findAllByCustomerId(customer.getId())
+                .stream()
+                .map(order -> {
+                    var products = order.getProducts().stream().map(product -> modelMapper.map(product, ProductsForClientDto.class)).toList();
+                    return OrdersResponse
+                            .builder()
+                            .products(products)
+                            .orderStatus(order.getOrderStatus())
+                            .build();
+                }).toList();
+    }
+
+    public List<OrdersResponse> listOrdersAvailableForDelivery(HttpServletRequest request) {
+
+        return orderRepository.findAllAvailableForDelivery()
+                .stream()
+                .map(order -> {
+                    var products = order.getProducts().stream().map(product -> modelMapper.map(product, ProductsForClientDto.class)).toList();
+                    return OrdersResponse
+                            .builder()
+                            .products(products)
+                            .orderStatus(order.getOrderStatus())
+                            .build();
+                }).toList();
+
     }
 }

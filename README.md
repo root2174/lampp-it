@@ -12,8 +12,11 @@ O projeto conta com um endpoint de login, que servirá para a realização do te
 
 ## Instalação e execução
 
+Rode ``` docker compose up --build ``` para rodar o banco de dados.
+
 Rode ```
 mvn install``` 
 para instalação das dependências do projeto.
+
 
 A url base é: ``` http://localhost:8080```

@@ -10,7 +10,9 @@ public class CanChangeOrderStatusValidator {
         List<OrderStatus> validStatusOrder = Arrays.asList(
                 OrderStatus.REGISTERED,
                 OrderStatus.IN_PROGRESS,
-                OrderStatus.COMPLETED
+                OrderStatus.COMPLETED,
+                OrderStatus.DELIVERING,
+                OrderStatus.DELIVERED
         );
 
         int currentStatusIndex = validStatusOrder.indexOf(currentStatus);
