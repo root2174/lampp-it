@@ -1,3 +1,5 @@
+use `lampp-it`;
+
 CREATE TABLE IF NOT EXISTS delivery_person (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,

@@ -59,6 +59,8 @@ public class SecurityConfig {
 						.requestMatchers(new AntPathRequestMatcher("/webjars/**")).permitAll()
 						.requestMatchers(new AntPathRequestMatcher("/api/v1/hello")).permitAll()
 						.requestMatchers(new AntPathRequestMatcher("/api/v1/products", "POST")).hasRole(COMPANY.name())
+						.requestMatchers(new AntPathRequestMatcher("/api/v1/orders", "POST")).hasRole(CUSTOMER.name())
+						.requestMatchers(new AntPathRequestMatcher("/api/v1/orders/change-status/**", "PATCH")).hasRole(COMPANY.name())
 						.anyRequest().permitAll()
 				)
 				.sessionManagement()

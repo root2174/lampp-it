@@ -2,10 +2,11 @@ package br.com.lamppit.teste.order.model;
 
 import br.com.lamppit.teste.company.model.Company;
 import br.com.lamppit.teste.customer.model.Customer;
+import br.com.lamppit.teste.products.model.Product;
 import lombok.*;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -20,14 +21,14 @@ public class Order {
     private Long id;
 
     @Column(name = "payment_method", nullable = false)
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "delivery_method", nullable = false)
     private DeliveryMethod deliveryMethod;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private OrderStatus orderStatus;
 
@@ -35,4 +36,15 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
+
+    @ManyToMany
+    @JoinTable(
+            name = "orders_products",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products;
 }

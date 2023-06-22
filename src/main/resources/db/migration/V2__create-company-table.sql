@@ -1,3 +1,5 @@
+use `lampp-it`;
+
 CREATE TABLE IF NOT EXISTS company (
      id BIGINT AUTO_INCREMENT PRIMARY KEY,
      open_hour INT NOT NULL,

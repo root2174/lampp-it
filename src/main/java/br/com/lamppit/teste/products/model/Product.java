@@ -1,10 +1,12 @@
 package br.com.lamppit.teste.products.model;
 
 import br.com.lamppit.teste.company.model.Company;
+import br.com.lamppit.teste.order.model.Order;
 import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -27,4 +29,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
+
+    @ManyToMany(mappedBy = "products")
+    private List<Order> orders;
 }

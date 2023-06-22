@@ -6,6 +6,8 @@ import br.com.lamppit.teste.customer.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class CustomerService {
@@ -23,5 +25,9 @@ public class CustomerService {
         repository.save(customer);
 
         return customer.getId();
+    }
+
+    public Optional<Customer> findByEmail(String email) {
+        return repository.findByEmail(email);
     }
 }

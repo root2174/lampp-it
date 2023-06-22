@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -49,5 +50,13 @@ public class ProductsService {
     public Page<ProductsDto> listByCompanyId(Long companyId, Pageable pagination) {
         return productsRepository.findAllByCompanyId(companyId, pagination)
                 .map(product -> modelMapper.map(product, ProductsDto.class));
+    }
+
+    public List<Product> findAllById(List<Long> productsIds) {
+        return productsRepository.findAllById(productsIds);
+    }
+
+    public List<Product> findAllByIdAndCompanyId(List<Long> productsIds, Long companyId) {
+        return productsRepository.findAllByIdAndCompanyId(productsIds, companyId);
     }
 }
