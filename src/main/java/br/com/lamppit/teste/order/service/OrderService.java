@@ -120,22 +120,17 @@ public class OrderService {
                 .findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Customer not found!"));
 
-        return orderRepository.findAllByCustomerId(customer.getId())
-                .stream()
-                .map(order -> {
-                    var products = order.getProducts().stream().map(product -> modelMapper.map(product, ProductsForClientDto.class)).toList();
-                    return OrdersResponse
-                            .builder()
-                            .products(products)
-                            .orderStatus(order.getOrderStatus())
-                            .build();
-                }).toList();
+        return toOrdersResponse(orderRepository.findAllByCustomerId(customer.getId()));
     }
 
-    public List<OrdersResponse> listOrdersAvailableForDelivery(HttpServletRequest request) {
+    public List<OrdersResponse> listOrdersAvailableForDelivery() {
+        return toOrdersResponse(orderRepository.findAllAvailableForDelivery());
+    }
 
-        return orderRepository.findAllAvailableForDelivery()
-                .stream()
+    public List<OrdersResponse> toOrdersResponse(
+            List<Order> orders
+    ) {
+        return orders.stream()
                 .map(order -> {
                     var products = order.getProducts().stream().map(product -> modelMapper.map(product, ProductsForClientDto.class)).toList();
                     return OrdersResponse
@@ -144,6 +139,5 @@ public class OrderService {
                             .orderStatus(order.getOrderStatus())
                             .build();
                 }).toList();
-
     }
 }

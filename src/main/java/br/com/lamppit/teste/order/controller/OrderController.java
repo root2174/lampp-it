@@ -70,11 +70,11 @@ public class OrderController {
         return ResponseEntity.ok().body(orders);
     }
     @GetMapping("/delivery/available")
-    @ApiOperation(value = "Endpoint para o cliente acompanhar o pedido")
+    @ApiOperation(value = "Endpoint que mostra os pedidos disponíveis para entrega.")
     public ResponseEntity<List<OrdersResponse>> listOrdersAvailableForDelivery(
             HttpServletRequest request
     ) {
-        var orders = orderService.listOrdersAvailableForDelivery(request);
+        var orders = orderService.listOrdersAvailableForDelivery();
         return ResponseEntity.ok().body(orders);
     }
 }
